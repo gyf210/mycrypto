@@ -24,8 +24,6 @@ func NewCryptoWriter(w io.Writer, key string) io.Writer {
 	}
 }
 
-// 把b里面的数据进行加密，之后写入到w.w里面
-// 调用w.w.Write进行写入
 func (w *CryptoWriter) Write(b []byte) (int, error) {
 	buf := make([]byte, len(b))
 	w.cipher.XORKeyStream(buf, b)
@@ -54,12 +52,4 @@ func (r *CryptoReader) Read(b []byte) (int, error) {
 	buf := b[:n]
 	r.cipher.XORKeyStream(buf, buf)
 	return n, err
-}
-
-func main() {
-	//r := NewCryptoReader(os.Stdin, "123456")
-	//io.Copy(os.Stdout, r)
-
-	w := NewCryptoWriter(os.Stdout, "123456")
-	io.Copy(w, os.Stdin)
 }
