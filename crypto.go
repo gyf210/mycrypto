@@ -4,7 +4,6 @@ import (
 	"crypto/md5"
 	"crypto/rc4"
 	"io"
-	"os"
 )
 
 type CryptoWriter struct {
